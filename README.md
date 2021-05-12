@@ -53,7 +53,7 @@ From January 2021 to the present, internship partner Danh Nguyen and I have tack
     3. decode_labels.json - connection between integer classes and their corresponding land use attribute
   
  
-# Project 3: QA/QC Incoming Jurisdiction Information:
+# Project 3: QA/QC Incoming Jurisdiction Information
 
 ### Goals:
 
