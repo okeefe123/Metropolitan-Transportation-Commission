@@ -54,9 +54,9 @@ From January 2021 to the present, internship partner Danh Nguyen and I have tack
  
 # Project 3: QA/QC Incoming Jurisdiction Information:
 
-###Goals:
+### Goals:
 
-1. Given entries from a jurisdiction, track and analyze the changes from any previous table version.
+1. Given entries from a jurisdiction via BASIS website, track and analyze the changes from any previous table version.
     a. Determine Metrics that can be used as a reflection of valid entries
     b. Generalize to compare any updated entry with any master table enty which shares same unique key
         
