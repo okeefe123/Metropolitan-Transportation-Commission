@@ -53,3 +53,46 @@ From January 2021 to the present, internship partner Danh Nguyen and I have tack
   
  
 # Project 3: QA/QC Incoming Jurisdiction Information:
+
+###Goals:
+
+    1. Given entries from a jurisdiction, track and analyze the changes from any previous table version.
+        a. Determine Metrics that can be used as a reflection of valid entries
+        b. Generalize to compare any updated entry with any master table enty which shares same unique key
+        
+    2. Find a method to track all rows potentially affected in redshift database via primary key
+    
+    3. Implement analysis as an AWS Lambda Function for external use.
+        a. Gain a better understanding of "Layers" to bootstrap libraries in a space efficient manner
+        b. Implement call capabilities both from a Python Environment and through a REST API
+        
+    4. Store warning and update logs into appropriate socrata tables for future reference.
+
+
+### Assumptions:
+    1. The tables ingested by this pipeline have been pulled from Socrata (and thus that values for all features are consistent in datatype)
+
+    2. Jurisdiction updates are presented to the function as a json file.
+    
+    3. Aforementioned presentation shares same schema as old table
+        a. Full table with updated columns
+        b. Updated columns themselves
+                
+    4. If a row was added in the update, it was assigned a unique primary key
+    
+    5. A row's recid cannot be changed (since it's used as the primary key between old and new dataframe)
+    
+    6. Columns of type "float" are continuous (not ordinal/nominal categories)
+    
+    7. The fifth percentile to the 95th percentile of master socrata dataframe numerical columns is sufficient metric for "normal" updates
+    
+    8. Novel string updates when compared to old column counterparts are suspicious enough to raise warnings
+    
+
+### Output:
+
+    1. Update table log with schema:
+        - recid, city_name, cols_updated, updated_from_NaN, changed_vals, out_of_range, warnings, editor, edit_timestamp, edit_type (C/U/D), main_version, old_vals, new_vals
+        
+    2. Warning log with schema:
+        - city, editor, recid, warn
