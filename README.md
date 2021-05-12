@@ -2,7 +2,7 @@
 
 From January 2021 to the present, internship partner Danh Nguyen and I have tackled multiple projects proposed by the Metropolitan Transportation Commission in their efforts to collect and standardize zoning information from jurisdictions around the Bay Area. The current overarching goal of the agency is to aggregate as much information as possible to aid in making [Plan Bay Area 2050](https://www.planbayarea.org/plan-bay-area-2050-1) (a long-term initiative addressing the economy, the environment, housing, and transportation in the Bay Area) a reality. The following projects are a combination of Research & Development as well as solutions to the immediate needs of the commission.
 
-# Project 1:  Policy Attribute Scraper Pipeline
+# Project 1:  Policy Attribute Scraping Pipeline
 
 ### Goals:
 
