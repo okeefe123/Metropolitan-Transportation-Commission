@@ -45,6 +45,7 @@ From January 2021 to the present, internship partner Danh Nguyen and I have tack
     
 ### Production Model:
 
+- Model Algorithm: XGBoostClassifier
 - Provides the probability of any given line in a document belonging to each of the assumed land use classes
 - Necessary Information Format:
     1. Raw text version of policy zoning document
