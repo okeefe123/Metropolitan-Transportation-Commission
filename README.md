@@ -20,7 +20,7 @@ From January 2021 to the present, internship partner Danh Nguyen and I have tack
 
 4. Use document context of found attributes to identify potential zones to which they are applicable.
 
-# Project 2: Attribute Classifier
+# Project 2: Policy Attribute Classifier
 
 ### Goals:
 
@@ -53,25 +53,28 @@ From January 2021 to the present, internship partner Danh Nguyen and I have tack
     3. decode_labels.json - connection between integer classes and their corresponding land use attribute
   
  
-# Project 3: QA/QC Incoming Jurisdiction Information
+# Project 3: Jurisdiction Entry QA/QC Analysis
 
-### Goals:
+- lambda function ARN: 
 
-1. Given entries from a jurisdiction via BASIS website, track and analyze the changes from any previous table version.
+    aws:lambda:us-west-2:311263071456:function:jurisdiction-entry-analysis
+
+## Goals: 
+1. Given entries from a jurisdiction, track and analyze the changes from any previous table version.
     a. Determine Metrics that can be used as a reflection of valid entries
     b. Generalize to compare any updated entry with any master table enty which shares same unique key
-        
+    
 2. Find a method to track all rows potentially affected in redshift database via primary key
     
 3. Implement analysis as an AWS Lambda Function for external use.
     a. Gain a better understanding of "Layers" to bootstrap libraries in a space efficient manner
     b. Implement call capabilities both from a Python Environment and through a REST API
         
-4. Store warning and update logs into appropriate socrata tables for future reference.
+4. Store warning and update logs into appropriate Redshift tables for future reference.
 
 
-### Assumptions:
-1. The tables ingested by this pipeline have been pulled from Socrata (and thus that values for all features are consistent in datatype)
+## Assumptions:
+1. The tables ingested by this pipeline have been pulled from Redshift land use 2020 table (and thus that values for all features are consistent in datatype)
 
 2. Jurisdiction updates are presented to the function as a json file.
     
@@ -88,12 +91,55 @@ From January 2021 to the present, internship partner Danh Nguyen and I have tack
 7. The fifth percentile to the 95th percentile of master socrata dataframe numerical columns is sufficient metric for "normal" updates
 
 8. Novel string updates when compared to old column counterparts are suspicious enough to raise warnings
+    
 
-
-### Output:
+## Ouput:
 
 1. Update table log with schema:
-    - recid, city_name, cols_updated, updated_from_NaN, changed_vals, out_of_range, warnings, editor, edit_timestamp, edit_type (C/U/D), main_version, old_vals, new_vals
+    - recid, city_name, cols_updated, updated_from_nan, updated_to_nan, changed_vals, out_of_range, warnings, editor, edit_timestamp, edit_type__c_u_d__, main_version, old_vals, new_vals
 
 2. Warning log with schema:
     - city, editor, recid, warn
+
+# Project 4: Resilience Building Classifier 
+
+## Goals:
+
+1. Use data collected from 2019-2020 team of Google street views to replicate Deep Learning Classifier which predicts land use types:
+
+    i. Commercial
+    
+    ii. Downtown
+    
+    iii. Industrial
+    
+    iv. Residential
+
+2. Improve on the previous model by the following techniques:
+
+    a. Choosing the more sophisticated Resnet18 as base model.
+    
+    b. Enabling fine tuning for layers within the pretrained model.
+    
+    c. Implement additional augmentation techniques to the training images
+    
+
+## Steps:
+
+1. Read in data from directory 2000_per_label_images as a pandas dataframe.
+
+2. Create Dataset class for retrieving images from their path and utilize DataLoaders for batch training.
+
+3. Upload the model and tweak the layers for our task
+
+4. Implement training procedure:
+
+    a. Create helper functions for hyperparameter adjustments (learning rate, layers prone to gradient descent)
+    
+        - Triangular learning rate
+        
+        - Unfreeze layers at a consistent interval through training epochs
+        
+5. Train model for 50 epochs.
+
+6. Analyze results.
