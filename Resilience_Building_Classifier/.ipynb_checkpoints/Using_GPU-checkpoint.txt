@@ -1,0 +1,11 @@
+1) Launch the VPN with USF username/password
+2) Use the following command to ssh:
+
+ssh -L 9001:localhost:1202 oniemann@138.202.168.122
+
+3) open jupyter notebook via: 
+jupyter lab --no-browser
+
+4) follow the link to open in browser (make sure local notebooks aren't running on the same port!). Make sure that you access with local port number 9001
+
+note: my port number is 1202
